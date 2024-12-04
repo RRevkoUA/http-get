@@ -70,7 +70,7 @@ static int8_t download_prepare(std::string *output_file, const std::string url, 
         *output_file = output;
     }
     
-    if (output_type != WRITE && std::filesystem::exists(*output_file)) {
+    if (output_type == WRITE && std::filesystem::exists(*output_file)) {
         std::cerr << "Error: File already exists." << std::endl;
         return -1;
     }
