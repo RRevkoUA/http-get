@@ -17,6 +17,7 @@ add_subdirectory(${ARGPARSE_DIR})
 find_package(CURL REQUIRED)
 add_executable(http-get 
     ${SRC_DIR}/main.cpp
+    ${SRC_DIR}/arguments.cpp
     ${SRC_DIR}/http_get.cpp
     )
 
