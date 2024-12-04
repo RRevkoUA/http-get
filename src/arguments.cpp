@@ -52,6 +52,4 @@ void arg_parse(int argc, const char *const argv[])
     if (http_download(url, output, output_type) != 0) {
         throw std::runtime_error("Could not download file.");
     }
-
-    std::cout << program;
 }
