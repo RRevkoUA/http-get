@@ -23,7 +23,17 @@ int8_t http_download(const std::string url, const char *const output, const outp
             std::cerr << "Error: File already exists." << std::endl;
             return -1;
         }
-        std::cout<<"Downloading file to: "<<output_file<<std::endl;
+        curl_easy_setopt(curl, CURLOPT_NOBODY, 1L);
+        curl_easy_setopt(curl, CURLOPT_CONNECT_ONLY, 1L);
+
+        res = curl_easy_perform(curl);
+        if (res != CURLE_OK) {
+            std::cerr << "Error: " << curl_easy_strerror(res) << std::endl;
+            curl_easy_cleanup(curl);
+            return -1;
+        }
+
+        std::cout << "Downloading file to: " << output_file << std::endl;
         file = fopen(output_file.c_str(), output_enum_map[output_type].c_str());
         if (file)
         {
