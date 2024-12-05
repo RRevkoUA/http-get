@@ -1,0 +1,9 @@
+[submodule "middlewares/argparse"]
+	path = middlewares/argparse
+	url = https://github.com/p-ranav/argparse
+[submodule "middlewares/curl"]
+	path = middlewares/curl
+	url = git@github.com:curl/curl.git
+[submodule "middlewares/MimeTypes"]
+	path = middlewares/MimeTypes
+	url = git@github.com:lasselukkari/MimeTypes.git
