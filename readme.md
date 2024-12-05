@@ -7,14 +7,13 @@ The HTTP Get program is a command-line tool for downloading content from web URL
 ## Installation
 
 ### Prerequisites
-- C++ compiler with C++11 support
+- C++ compiler with C++17 support
 - CMake
-- libcurl (if applicable)
 
 ### Clone the Repository
 
 ```bash
-git clone git@github.com:YourUsername/http-get.git
+git clone git@github.com:RRevkoUA/http-get.git
 cd http-get
 ```
 
