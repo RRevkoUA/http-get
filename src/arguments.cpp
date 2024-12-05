@@ -37,17 +37,17 @@ void arg_configure()
 void arg_parse(int argc, const char *const argv[])
 {
     program.parse_args(argc, argv);
-
-    std::string url = program.get<std::string>("--url");
-    const char *output = program.present("--output") ? program.get<std::string>("--output").c_str() : nullptr;
-    output_enum_t output_type = WRITE;
     
+    std::string url = program.get<std::string>("--url");
+    std::string output = program.is_used("--output") ? program.get<std::string>("--output").c_str() : "";
+    std::cout<<"URL: "<<program.get<std::string>("--url")<<std::endl;
+    output_enum_t output_type = WRITE;
     if (program.is_used("--type")) {
         output_type = parse_type(program.get<std::string>("--type"));
         if (output_type == INVALID) {
             throw std::runtime_error("Invalid output type.");
         }
-    } 
+    }
 
     if (http_download(url, output, output_type) != 0) {
         throw std::runtime_error("Could not download file.");

@@ -9,6 +9,6 @@
 // output - The output file name. If nullptr, the file will be saved in the current directory with the same name as the URL.
 // output_type - The type of output to use. See output_enums.hpp for more information.
 // Returns 0 on success, -1 on failure.
-int8_t http_download(const std::string url, const char *const output, const output_enum_t output_type);
+int8_t http_download(const std::string url, const std::string output, const output_enum_t output_type);
 
 #endif

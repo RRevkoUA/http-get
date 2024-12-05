@@ -4,3 +4,6 @@
 [submodule "middlewares/curl"]
 	path = middlewares/curl
 	url = git@github.com:curl/curl.git
+[submodule "middlewares/MimeTypes"]
+	path = middlewares/MimeTypes
+	url = git@github.com:lasselukkari/MimeTypes.git
