@@ -10,6 +10,7 @@ set(MIDDLEWARE_DIR ${CMAKE_SOURCE_DIR}/middlewares)
 
 set(LIBCURL_DIR ${MIDDLEWARE_DIR}/curl)
 set(ARGPARSE_DIR ${MIDDLEWARE_DIR}/argparse)
+set(MIMETYPES_DIR ${MIDDLEWARE_DIR}/MimeTypes)
 
 add_subdirectory(${LIBCURL_DIR})
 add_subdirectory(${ARGPARSE_DIR})
@@ -19,10 +20,12 @@ add_executable(http-get
     ${SRC_DIR}/main.cpp
     ${SRC_DIR}/arguments.cpp
     ${SRC_DIR}/http_get.cpp
+    ${MIMETYPES_DIR}/MimeTypes.cpp
     )
 
 target_include_directories(http-get PRIVATE 
     ${INC_DIR}
+    ${MIMETYPES_DIR}
     ${LIBCURL_DIR}
     ${ARGPARSE_DIR}
 )
