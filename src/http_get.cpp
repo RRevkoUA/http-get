@@ -149,7 +149,7 @@ static int8_t header_callback(char *buffer, size_t size, size_t nitems, void *us
     size_t pos = header.find(content_type_str);
 
     if (pos != std::string::npos) {
-        std::cout << "Found content type." << pos << header << content_type_str.length() << header.substr(pos + content_type_str.length()) << std::endl;
+        std::cout << "Found content type." << std::endl;
 
         std::string temp_type = header.substr(pos + content_type_str.length());
         temp_type = temp_type.substr(0, temp_type.find(";"));
