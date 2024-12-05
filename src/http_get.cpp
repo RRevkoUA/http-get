@@ -10,13 +10,13 @@
 #include <algorithm>
 
 // Generate name for output file.
-static int8_t download_prepare(std::string *output_file, const std::string url, const char *const output, const output_enum_t output_type);
+static int8_t download_prepare(std::string *output_file, const std::string url, const std::string output, const output_enum_t output_type);
 static int8_t header_callback(char *buffer, size_t size, size_t nitems, void *userdata);
 
 // Content type of the file, parsed from header.
 static std::string content_type;
 
-int8_t http_download(const std::string url, const char *const output, const output_enum_t output_type)
+int8_t http_download(const std::string url, const std::string output, const output_enum_t output_type)
 {
     CURL *curl;
     CURLcode res;
@@ -73,7 +73,7 @@ int8_t http_download(const std::string url, const char *const output, const outp
     }
 }
 
-static int8_t download_prepare(std::string *output_file, const std::string url, const char *const output, const output_enum_t output_type)
+static int8_t download_prepare(std::string *output_file, const std::string url, const std::string output, const output_enum_t output_type)
 {
     std::string temp = "";
     std::string temp_url = url;
@@ -85,7 +85,6 @@ static int8_t download_prepare(std::string *output_file, const std::string url, 
 
     std::cout<<"URL: "<<temp_url<<std::endl;
     temp_url = temp_url.substr(temp_url.find_last_of("/") + 1);
-
 
 // Compare content type with MIME type. If its true, we would use url file extension.
 
@@ -108,15 +107,13 @@ static int8_t download_prepare(std::string *output_file, const std::string url, 
         }
     }
 
-    
     std::cout<<"Preparing to download file from: "<<url<<std::endl;
-    if (output == nullptr) {
+    if (output == "") {
         *output_file = "./";
         *output_file += temp_url;
         *output_file += extention;
 
         std::cout<<"Output file not specified. Using default: "<<*output_file<<std::endl;
-
     } 
     else if (std::filesystem::is_directory(output)) {
         *output_file = output;
