@@ -75,6 +75,7 @@ int8_t http_download(const std::string url, const char *const output, const outp
 
 static int8_t download_prepare(std::string *output_file, const std::string url, const char *const output, const output_enum_t output_type)
 {
+    std::string temp = "";
     std::string temp_url = url;
     std::string extention = "";
 
@@ -82,16 +83,36 @@ static int8_t download_prepare(std::string *output_file, const std::string url, 
         temp_url.pop_back();
     }
 
+    std::cout<<"URL: "<<temp_url<<std::endl;
+    temp_url = temp_url.substr(temp_url.find_last_of("/") + 1);
+
+
+// Compare content type with MIME type. If its true, we would use url file extension.
+
     if (content_type.size()) {
-        extention = ".";
-        extention += MimeTypes::getExtension(content_type.c_str());
+        if (temp_url.find_last_of(".") != std::string::npos) {
+            // compare with content type.
+            temp = temp_url.substr(temp_url.find_last_of(".") + 1);
+
+            if (!temp.size() && content_type == MimeTypes::getType(temp.c_str())) {
+                std::cout<<"Content type matches MIME type."<<std::endl;
+            }
+            else {
+                temp = "";
+            }
+        }
+
+        if (!temp.size()) {
+            extention = ".";
+            extention += MimeTypes::getExtension(content_type.c_str());
+        }
     }
 
-
+    
     std::cout<<"Preparing to download file from: "<<url<<std::endl;
     if (output == nullptr) {
         *output_file = "./";
-        *output_file += temp_url.substr(temp_url.find_last_of("/") + 1);
+        *output_file += temp_url;
         *output_file += extention;
 
         std::cout<<"Output file not specified. Using default: "<<*output_file<<std::endl;
@@ -100,7 +121,7 @@ static int8_t download_prepare(std::string *output_file, const std::string url, 
     else if (std::filesystem::is_directory(output)) {
         *output_file = output;
         *output_file += "/";
-        *output_file += temp_url.substr(temp_url.find_last_of("/") + 1);
+        *output_file += temp_url;
         *output_file += extention;
     }
     else {
